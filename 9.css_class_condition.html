@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css class condition</title>
+
+	<style>
+		.selected { font-weight: bold; }
+	</style>
+
+</head>
+<body>
+	
+<div ng-app="myApp">
+	<div ng-controller="sampleController">
+		
+		<ul>
+			<li ng-repeat="student in names" ng-click="selectedName($index)" ng-class="{selected: $index==selectedRow}">{{student.name}}</li>
+		</ul>
+
+	</div>
+</div>
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var names = [{ "name" : 'A' }, { "name" : 'B' }];
+
+var myApp = angular.module('myApp', []);
+myApp.controller('sampleController', ['$scope', function($scope) {
+	$scope.names = names;
+
+	$scope.selectedName = function(index){
+		$scope.selectedRow = index;
+	};
+
+}]);
+</script>
+
+</body>
+</html>

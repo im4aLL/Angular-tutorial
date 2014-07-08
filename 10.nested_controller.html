@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Nested Controller</title>
+</head>
+<body>
+	
+<div ng-app="myApp">
+	<div ng-controller="sampleController">
+		Hello {{name}}, Good {{greetings}}!
+		<div ng-controller="nestedController">
+			Hello {{name}}, Good {{greetings}}!
+			<div ng-controller="nestedControllerTwo">
+				Hello {{name}}, Good {{greetings}}!
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var myApp = angular.module('myApp', []);
+
+myApp.controller('sampleController', ['$scope', function($scope) {
+	$scope.name = 'James';
+	$scope.greetings = 'Morning';
+}]);
+
+myApp.controller('nestedController', ['$scope', function($scope) {
+	$scope.name = 'Smith';
+}]);
+
+myApp.controller('nestedControllerTwo', ['$scope', function($scope) {
+	$scope.greetings = 'Evening';
+}]);
+
+</script>
+
+</body>
+</html>

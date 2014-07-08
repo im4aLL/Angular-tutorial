@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Counter</title>
+
+	<style>
+		body { font-family: "Arial"; font-size: 14px }
+		table td { padding: 5px; }
+		table tr:nth-child(1) { background-color: #ececec }
+	</style>
+</head>
+<body>
+	
+<div ng-app="ShoppingModule">
+	<div ng-controller="cartController">
+		
+		<table cellpadding="0" cellspacing="0">
+			<tr style="font-weight: bold">
+				<td>Item name</td>
+				<td>Qty</td>
+				<td>Unit price</td>
+				<td>Sub total</td>
+			</tr>
+			<tr ng-repeat="item in items">
+				<td>{{item.title}}</td>
+				<td><input type="number" ng-model="item.quantity"></td>
+				<td>{{item.price | currency}}</td>
+				<td>{{item.quantity * item.price | currency}}</td>
+			</tr>
+			<tr style="font-weight: bold">
+				<td colspan="3">Total</td>
+				<td>{{bill.totalcart | currency}}</td>
+			</tr>
+			<tr>
+				<td colspan="3">Discount</td>
+				<td>{{bill.discount | currency}}</td>
+			</tr>
+			<tr style="font-weight: bold">
+				<td colspan="3">Sub total</td>
+				<td>{{bill.subtotal | currency}}</td>
+			</tr>
+		</table>
+
+	</div>
+</div>
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var shoppingModule = angular.module('ShoppingModule', []);
+
+shoppingModule.factory('Items', function() {
+	var items = {};
+	items.query = function() {
+	return [
+		{title: 'T-Shirt', quantity: 8, price: 3.95},
+		{title: 'Denim Jeans', quantity: 17, price: 12.95},
+		{title: 'Formal Shirt', quantity: 5, price: 6.95}
+		];
+	};
+	return items;
+});
+
+shoppingModule.controller('cartController', ['$scope', function($scope, Items) {
+	$scope.bill = {};
+
+	$scope.items = [
+		{title: 'T-Shirt', quantity: 8, price: 3.95},
+		{title: 'Denim Jeans', quantity: 17, price: 12.95},
+		{title: 'Formal Shirt', quantity: 5, price: 6.95}
+		];
+
+	var calculateCart = function() {
+		var total = 0;
+		for( var i = 0; i < $scope.items.length; i++ ){
+			total = total + ( $scope.items[i].quantity * $scope.items[i].price);
+		}
+
+		$scope.bill.totalcart = total;
+		$scope.bill.discount = total > 100 ? 10 : 0;
+		$scope.bill.subtotal = total - $scope.bill.discount;
+	}
+
+	$scope.$watch("items", calculateCart, true);
+
+}]);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Unobtrusive Javascript</title>
+
+</head>
+<body>
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var myApp = angular.module('myApp', []);
+
+function firstController($scope){
+	$scope.triggerEvent = function(){
+		alert('1');
+	};
+}
+
+function secondController($scope){
+	$scope.triggerEvent = function(){
+		alert('2');
+	};
+}
+</script>
+	
+<div ng-app="myApp">
+
+	<div ng-controller="firstController">
+		<button ng-click="triggerEvent()">Button of 1st controller</button>
+	</div>
+
+	<div ng-controller="secondController">
+		<button ng-click="triggerEvent()">Button of 2nd controller</button>
+	</div>
+
+</div>
+
+</body>
+</html>

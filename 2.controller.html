@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Data Binding</title>
+
+</head>
+<body>
+
+<script>
+	function firstController($scope){
+		$scope.data = { msg : "Hello Angular!" };
+	}
+</script>
+	
+<div ng-app="">
+	<div ng-controller="firstController">
+		<h2>{{data.msg}}</h2>
+
+		<input type="number" ng-model="value.one" placeholder="Number"> + 
+		<input type="number" ng-model="value.two" placeholder="Number">
+		 = {{ value.one + value.two }}
+	</div>
+</div>
+
+<script src="src/angular.1.3.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Show and hide elements</title>
+
+
+	<style>
+		.text-colored-true { color: #ff0000; }
+	</style>
+
+</head>
+<body>
+	
+<div ng-app="myApp">
+
+	<div ng-controller="sampleController">
+		
+		<p ng-show="para.show" class="text-colored-{{isColored}}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis debitis aliquam, eos cum nihil quo eligendi exercitationem fugiat suscipit sit at odio nisi, facilis dolorum, quasi, fuga iusto quos. A.</p>
+
+		<button ng-click="toggleP()">Paragraph show : {{ para.show }}</button>
+		<button ng-click="colorText()">CSS color toggle (current state: {{isColored}})</button>
+
+	</div>
+
+</div>
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var myApp = angular.module('myApp', []);
+
+myApp.controller('sampleController', ['$scope', function($scope) {
+
+	$scope.para = {};
+	$scope.para.show = true;
+	$scope.toggleP = function(){
+		$scope.para.show = $scope.para.show === false ? true : false;
+	};
+
+	$scope.isColored = false;
+	$scope.colorText = function(){
+		$scope.isColored = $scope.isColored === false ? true : false;
+	};
+
+}]);
+
+
+</script>
+
+</body>
+</html>

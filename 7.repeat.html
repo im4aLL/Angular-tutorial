@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Repeat elements</title>
+
+</head>
+<body>
+	
+<div ng-app="myApp">
+
+	<div ng-controller="studentData">
+		<ul>
+			<li ng-repeat='student in students'>
+				<a href='?id={{student.id}}'>{{$index + 1}}. {{student.name}}</a>
+			</li>
+		</ul>
+
+		<button ng-click="insertTom()">Insert</button>
+		
+
+	</div>
+
+</div>
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var myApp = angular.module('myApp', []);
+
+var students = [{name:'Mary Contrary', id:'1'},
+				{name:'Jack Sprat', id:'2'},
+				{name:'Jill Hill', id:'3'}];
+
+myApp.controller('studentData', ['$scope', function($scope) {
+	
+	$scope.students = students;
+
+	$scope.insertTom = function(){
+		$scope.students.splice(1, 0, {name:'Tom Thumb', id:'4'});
+	};
+
+}]);
+
+
+</script>
+
+</body>
+</html>
