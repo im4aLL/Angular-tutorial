@@ -1,0 +1,20 @@
+body { font-family: Arial; font-size: 14px; line-height: 18px; }
+hr {
+    height: 1px;
+    color: #ccc;
+    background: #ececec;
+    font-size: 0;
+    border: 0;
+    margin: 20px 0
+}
+
+form.custom { background: #f9f9f9; padding: 50px; border-top: 1px solid #ddd; width: 900px; margin: auto }
+form.custom label { display: inline-block; width: 150px; text-align: right; line-height: 35px; }
+form.custom span { font-size: 11px; color: #ff0000 }
+form.custom .error input { border: 1px solid #ff0000 }
+
+
+.ng-pristine {}
+.ng-dirty {}
+.ng-valid {}
+.ng-invalid {}

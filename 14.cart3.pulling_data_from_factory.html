@@ -62,14 +62,10 @@ shoppingModule.factory('Items', function() {
 	return items;
 });
 
-shoppingModule.controller('cartController', ['$scope', function($scope, Items) {
+shoppingModule.controller('cartController', ['$scope', 'Items', function($scope, Items) {
 	$scope.bill = {};
 
-	$scope.items = [
-		{title: 'T-Shirt', quantity: 8, price: 3.95},
-		{title: 'Denim Jeans', quantity: 17, price: 12.95},
-		{title: 'Formal Shirt', quantity: 5, price: 6.95}
-		];
+	$scope.items = Items.query();
 
 	var calculateCart = function() {
 		var total = 0;

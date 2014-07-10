@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Form</title>
+	<link rel="stylesheet" href="src/doc.css">
+
+<style type="text/css">
+input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+input.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }
+</style>
+
+</head>
+<body>
+	
+<div ng-app="myApp">
+	<div ng-controller="formModule">
+		
+		<form action="" novalidate>
+			<label for="cname">Company name:</label>
+			<input type="text" id="cname" ng-model="frm.companyName" required>
+		
+			<label for="location">Location:</label>
+			<input type="text" id="location" ng-model="frm.location" required>
+
+			<button type="submit" ng-click="save(frm)">SAVE</button>
+		</form>
+
+		<h4>From data</h4>
+		{{frm}}
+
+		<h4>Saved data</h4>
+		{{masterData}}
+		
+	</div>
+</div>
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var myApp = angular.module('myApp', []);
+
+myApp.controller('formModule', ['$scope', function($scope) {
+	$scope.masterData = {};
+	$scope.save = function(frm){
+		$scope.masterData = angular.copy(frm);
+		//$scope.masterData = frm;
+		console.log( $scope.masterData );
+	};
+}]);
+</script>
+
+</body>
+</html>

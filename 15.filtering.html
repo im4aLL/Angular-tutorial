@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Filtering</title>
+</head>
+<body>
+	
+<div ng-app="myApp">
+	<div ng-controller="sampleController">
+		
+		<input type="text" ng-model="text">
+		{{text | customFilter}}
+
+	</div>
+</div>
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var myApp = angular.module('myApp', []);
+
+myApp.controller('sampleController', ['$scope', function($scope) {
+	
+}]);
+
+myApp.filter('customFilter', function() {
+	var customFilter = function(input){
+		return input ? '\u2713' : '\u2718';
+	};
+
+	return customFilter;
+});
+</script>
+
+</body>
+</html>

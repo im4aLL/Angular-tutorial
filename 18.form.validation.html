@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Form</title>
+	<link rel="stylesheet" href="src/doc.css">
+
+</head>
+<body>
+	
+<div ng-app="myApp">
+	<div ng-controller="formModule">
+		
+		<form action="" name="registrationForm" novalidate ng-submit="submitForm(registrationForm.$valid)" class="custom">
+			
+			<div class="row">
+				<label for="name">Name:</label>
+				<input type="text" id="name" ng-model="user.name" name="name" ng-pattern="[a-zA-Z]">	
+			</div>
+			
+			<div class="row"> <!--ng-class="{error: registrationForm.email.$invalid && !registrationForm.email.$pristine}"-->
+				<label for="email">Email address:</label>
+				<input type="email" name="email" id="email" ng-model="user.email" required>
+				<span ng-show="registrationForm.email.$invalid && !registrationForm.email.$pristine">Enter valid email address!</span>	
+			</div>
+			
+			<div class="row">
+				<label for="username">Username: </label>
+				<input type="text" id="username" name="username" ng-model="user.username" ng-minlength="3" ng-maxlength="8" required>
+				<span ng-show="registrationForm.username.$error.minlength">Username is too short.</span>
+	        	<span ng-show="registrationForm.username.$error.maxlength">Username is too long.</span>	
+			</div>
+			
+			<label for=""></label>
+			<button type="submit" ng-disabled="registrationForm.$invalid">SAVE</button>
+		</form>
+		
+	</div>
+</div>
+
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var myApp = angular.module('myApp', []);
+
+myApp.controller('formModule', ['$scope', function($scope) {
+
+	$scope.submitForm = function(isValid){
+		if( isValid ) alert('Form is valid!');
+		else alert('Form is invalid!');
+
+		return false;
+	};
+}]);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<xmp>
+<input type="text"
+    ng-model="{string}"
+    [name="{string}"]
+    [required]
+    [ng-required="{string}"]
+    [ng-minlength="{number}"]
+    [ng-maxlength="{number}"]
+    [ng-pattern="{string}"]
+    [ng-change="{string}"]>
+</xmp>
+
+
+
+<table class="table table-bordered table-striped table-hover">
+<thead>
+<tr>
+<td>Property</td>
+<td>Class</td>
+<td>Description</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="success">$valid</td>
+<td>ng-valid</td>
+<td><em class="text-info">Boolean</em> Tells whether an item is currently valid based on the rules you placed.</td>
+</tr>
+<tr>
+<td class="danger">$invalid</td>
+<td>ng-invalid</td>
+<td><em class="text-info">Boolean</em> Tells whether an item is currently invalid based on the rules you placed.</td>
+</tr>
+<tr>
+<td class="active">$pristine</td>
+<td>ng-pristine</td>
+<td><em class="text-info">Boolean</em> True if the form/input <strong>has not</strong> been used yet.</td>
+</tr>
+<tr>
+<td class="warning">$dirty</td>
+<td>ng-dirty</td>
+<td><em class="text-info">Boolean</em> True if the form/input <strong>has</strong> been used.</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
