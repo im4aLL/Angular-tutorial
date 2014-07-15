@@ -41,14 +41,14 @@
 
 
 <script src="src/angular.1.3.min.js"></script>
-<script>
+<script> 
 var myApp = angular.module('myApp', []);
 
 myApp.controller('formModule', ['$scope', function($scope) {
 
 	$scope.submitForm = function(isValid){
-		if( isValid ) alert('Form is valid!');
-		else alert('Form is invalid!');
+		if( isValid ) alert('Form is valid :)!');
+		else alert('Form is invalid :(!');
 
 		return false;
 	};
