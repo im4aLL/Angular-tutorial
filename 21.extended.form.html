@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Extended form in Angular JS</title>
+	
+	<style>
+		.container { padding: 50px; }
+
+		.custom-select *{margin:0; padding:0;}
+		 .custom-select span{display:block; border:1px solid #ccc ; height: 30px; width: 210px; line-height:30px; padding-left:10px;}
+		 .custom-select span i{float:right; font-weight:bold; font-size:20px; -webkit-transform: rotate(90deg); transform: rotate(90deg); margin-right:10px;}
+		 .custom-select ul{list-style:none; border:1px solid #ccc; width:210px; color: #0a3845;} 
+		 .custom-select ul li{line-height:30px; border-bottom:1px solid #ccc ; padding-left:10px;}
+		 .custom-select ul li:nth-child(even){background:#ccc}
+	</style>
+
+	<link rel="stylesheet" href="css-f/foundation.min.css">
+</head>
+<body>
+
+
+<div class="container" ng-app="myApp">
+	
+	<!-- <div class="custom-select">
+		<span>Select your Country<i>></i></span>
+		<ul>
+			<li>Option 1</li>
+			<li>Option 2</li>
+			<li>Option 3</li>
+			<li>Option 4</li>
+		</ul>
+	</div> -->
+
+	
+	<div class="" ng-controller="formCtrl">
+
+		<form action="" name="registration" ng-submit="submitFrm(registration)">
+			
+			<label for="">Username</label>
+			<input type="text" name="username" ng-model="user.username">
+
+			<label for="">Full name</label>
+			<input type="text" name="fullname" ng-model="user.fullname">
+
+			<label for="">Country</label>
+			<select name="country" id="" ng-model="user.country" ng-options="country.name for country in countries"></select>
+
+			<div class="custom-select">
+				<span>Select your Country<i>></i></span>
+				<ul>
+					<li>Option 1</li>
+					<li>Option 2</li>
+					<li>Option 3</li>
+					<li>Option 4</li>
+				</ul>
+			</div>
+
+			<button type="submit">Submit</button>
+		</form>
+
+	</div>
+	
+
+</div>
+
+
+<script src="src/angular.1.3.min.js"></script>
+<script>
+var myApp = angular.module('myApp', []);
+
+myApp.factory('Data', function(){
+	var db = {};
+	
+	db.countryList = [
+		{ name : 'Bangladesh', code : 'BD' },
+		{ name : 'United States', code : 'US' },
+		{ name : 'Russia', code : 'RU' }
+	];
+
+	db.user = {
+		'username' : 'John',
+		'fullname' : 'John Smith'
+	};
+
+	return db;
+});
+
+function formCtrl($scope, Data){
+	$scope.user = Data.user;
+	$scope.countries = Data.countryList;
+
+	//$scope.user.country = $scope.countries[1];
+
+	$scope.submitFrm = function(form){
+
+
+		console.log( $scope.user );
+		return false;
+	};
+}
+
+</script>
+	
+</body>
+</html>
