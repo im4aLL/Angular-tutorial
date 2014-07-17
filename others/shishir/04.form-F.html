@@ -1,0 +1,97 @@
+<html ng-app='myApp'>
+<head>
+	<title>Form Validation Final | Angular</title>
+	<style type="text/css">
+		 ul li {list-style: none; line-height: 48px;}
+		 label{width: 100px; display: inline-block; font-weight: bold; color: #0a3845; font-family: arial; font-size: 14px;}
+		 input {border:1px solid #ccc ; height: 30px; padding-left: 10px; width: 200px;}
+		 em{color: #A9011C; margin-left: 10px;}
+		 em msg{color: #aaa;}
+		 em valid{display: inline-block; height: 22px; width: 25px; background: url('images/ok.png');}
+		 input.ng-dirty.ng-invalid{border-color: #A9011C; background: #f9f3f3}
+		 input.ng-valid{border-color: #00790F; background: #f3fef3}
+		 button{margin-left: 104px; height: 34px; width: 200px; border: 1px solid #ccc; box-shadow:0 0 3px #888; background: #f3f3f3; font-family: arial; font-weight: bold;}
+		 button.pristine-false.valid-true{background: #f3fef3}
+		 button.pristine-false.valid-false{background: #f9cfcf}
+	</style>
+</head>
+
+<body  ng-controller="newUser">
+
+	<form name="newUserForm"  action="" method="post" ng-submit="userFormSubmit(newUserForm)" novalidate>
+		<ul>
+			<li>
+				<label for="userName">User Name</label>
+				<input type="text" ng-model="userName" name="userName" id="userName" ng-minlength="3" ng-maxlength="8" ng-pattern="/^[a-zA-Z0-9]*$/" required/>
+
+				<em ng-show="newUserForm.userName.$pristine"><msg>Required, length 3-8, alphanumeric only.</msg></em>
+				<em ng-show="newUserForm.userName.$error.minlength">Too short.</em>
+				<em ng-show="newUserForm.userName.$error.maxlength">Too long.</em>
+				<em ng-show="newUserForm.userName.$invalid-required && !newUserForm.userName.$pristine && !newUserForm.userName.$error.minlength && !newUserForm.userName.$error.maxlength">Required &amp; alphanumeric only.</em>
+				<em ng-show="newUserForm.userName.$valid"><valid></valid></em>
+			</li>
+			<li>
+				<label for="userEmail">Email</label>
+				<input type="email" name="userEmail" id="userEmail" ng-model="userEmail" required/>
+
+				<em ng-show="newUserForm.userEmail.$pristine"><msg>Required.</msg></em>
+				<em ng-show="!newUserForm.userEmail.$pristine && newUserForm.userEmail.$invalid">Please enter valid email.</em>
+				<em ng-show="newUserForm.userEmail.$valid"><valid></valid></em>
+			</li>
+			<li>
+				<label for="userAge">Age</label>
+				<input type="number" ng-model="userAge" name="userAge" id="userAge" min="18" max="30" required/>
+
+				<em ng-show="newUserForm.userAge.$pristine"><msg>Required, in between 18-30.</msg></em>
+				<em ng-show="newUserForm.userAge.$error.min">Too small.</em>
+				<em ng-show="newUserForm.userAge.$error.max">Too old.</em>
+				<em ng-show="newUserForm.userAge.$invalid-required && !newUserForm.userAge.$pristine && !newUserForm.userAge.$error.min && !newUserForm.userAge.$error.max">Required &amp; in between 18-30.</em>
+				<em ng-show="newUserForm.userAge.$valid"><valid></valid></em>
+			</li>
+			<li>
+				<label for="userPhone">Phone</label>
+				<input type="text" ng-model="userPhone" name="userPhone" id="userPhone" ng-pattern="/^[0]{1}[1]{1}[1-9]{1}[-]{1}[0-9]{8}$/" required/>
+
+				<em ng-show="newUserForm.userPhone.$pristine"><msg>Required, pattern: 016-12345678</msg></em>
+				<em ng-show="newUserForm.userPhone.$invalid-pattern && !newUserForm.userPhone.$pristine">Invalid Pattern. Please Try 016-12345678</em>
+				<em ng-show="newUserForm.userPhone.$valid"><valid></valid></em>
+			</li>
+			<li><button class="pristine-{{newUserForm.$pristine}} valid-{{newUserForm.$valid}}">Submit</button></li>
+		</ul>
+	</form>
+
+	<script src="angular.min.js"></script>
+	<script>
+	var app=angular.module("myApp",[]);
+
+
+	app.controller('newUser', ['$scope',function($scope){
+
+		$scope.userFormSubmit=function(form){
+			if(!form.$valid){
+
+				var requiredFields = form.$error.required,
+				focused = false;
+
+				for(var i=0; i< requiredFields.length; i++){
+					requiredFields[i].$setViewValue(false);
+
+					if(!focused) {
+						document.getElementById(requiredFields[i].$name).focus();
+						focused = true;
+					}
+				}
+				
+			}
+			else alert(form.$valid);
+			
+			return false;
+		};
+		
+	}]);
+
+	</script>
+
+
+</body>
+</html>

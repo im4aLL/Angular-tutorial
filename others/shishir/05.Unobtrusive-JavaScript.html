@@ -1,0 +1,39 @@
+<html ng-app='myApp'>
+	<head>
+		<title>Unobtrusive JavaScript | Angular</title>
+		<style type="text/css">
+			div{width: 200px; height: 100px; background: #f6f6f6}
+		</style>
+	</head>
+
+	<body>
+		<h1>Unobtrusive JavaScript</h1>
+
+
+
+		<div ng-click="doSomething()" ng-controller="NavController">
+			<ul ng-controller="ContentAreaController">
+				<li ng-click="doSomething($event)">Click to li</li>
+			</ul>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+		<script>
+		var app=angular.module("myApp",[]);
+
+		 app.controller('NavController',['$scope',function($scope){
+			 $scope.doSomething = function(){
+			 	alert('div clicked')
+			 }; 
+		}]);
+
+		 app.controller('ContentAreaController',['$scope',function($scope){
+			 $scope.doSomething = function($event){
+			 	alert('li clicked');
+			 	$event.stopPropagation();
+			 };
+		}]);
+
+		</script>
+	</body>
+</html>
