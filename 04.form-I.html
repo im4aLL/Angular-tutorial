@@ -1,0 +1,46 @@
+<html ng-app='myApp'>
+<head>
+	<title>Form Validation With Custom Select | Angular</title>
+	<style type="text/css">
+		.custom-select *{margin:0; padding:0;}
+		 .custom-select span{display:block; border:1px solid #ccc ; height: 30px; width: 200px; line-height:30px; padding-left:10px;}
+		 .custom-select span i{float:right; font-weight:bold; font-size:20px; -webkit-transform: rotate(90deg); transform: rotate(90deg); margin-right:10px;}
+		 .custom-select ul{list-style:none; border:1px solid #ccc; width:210px; color: #0a3845;} 
+		 .custom-select ul li{line-height:30px; border-bottom:1px solid #ccc ; padding-left:10px;}
+		 .custom-select ul li:nth-child(odd){background:#eee}
+	</style>
+</head>
+
+<body  ng-controller="newUser">
+
+	<div class="custom-select">
+		<span>Select your Country<i>></i></span>
+		<ul>
+			<li ng-repeat="country in countryList">{{country.name}}</li>
+		</ul>
+	</span>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+	<script>
+	var app=angular.module("myApp",[]);
+
+
+	app.controller('newUser', ['$scope',function($scope){
+
+
+		$scope.countryList = [
+	      {name:'Afghanistan', code:'AF'},
+	      {name:'Albania', code:'AL'},
+	      {name:'Algeria', code:'D'},
+	      {name:'Bangladesh', code:'BD'}
+	    ];
+
+		
+	}]);
+
+	</script>
+
+
+</body>
+</html>
