@@ -26,6 +26,13 @@
 		 .checkbox.active { border: 1px solid #a0a0a0; color: #000 }
 		 .checkbox.active i { background: url(images/checkmark.png); opacity: 1 }
 
+		 .radiobtn { font-size: 14px; border: 1px solid #ddd; padding: 12px 15px; color: #777; cursor: pointer; }
+
+		 .radiobtn i { width: 16px; height: 16px; display: inline-block; background: url(images/radio-unchecked.png); float: left; opacity: .7; margin-right: 5px }
+
+		 .radiobtn.active { border: 1px solid #a0a0a0; color: #000 }
+		 .radiobtn.active i { background: url(images/radio-checked.png); }
+
 	</style>
 
 	<link rel="stylesheet" href="css-f/foundation.min.css">
@@ -39,16 +46,19 @@
 
 		<h3>Custom select and checkbox UI validation in Angular</h3>
 
-		<form action="" name="registration" ng-submit="submitFrm(registration)">
+		<form action="" name="registration" ng-submit="submitFrm(registration)" novalidate>
 			
-			<label for="">Username</label>
-			<input type="text" name="username" ng-model="user.username">
+			<label for="" ng-class="{error: err.username}">Username</label>
+			<input type="text" name="username" id="username" ng-model="user.username" ng-minlength="5" required ng-class="{error: err.username}">
+			<span ng-show="!registration.username.$pristine && registration.username.$invalid && !registration.username.$error.minlength" ng-class="{error: err.username}">This field is required</span>
+			<span ng-show="registration.username.$error.minlength && !registration.username.$pristine" ng-class="{error: err.username}">Min 5 char</span>
 
-			<label for="">Full name</label>
-			<input type="text" name="fullname" ng-model="user.fullname">
+			<label for="" ng-class="{error: err.fullname}">Full name</label>
+			<input type="text" name="fullname" ng-model="user.fullname" required ng-class="{error: err.fullname}">
+			<span ng-show="!registration.fullname.$pristine && registration.fullname.$invalid" ng-class="{error: err.fullname}">This field is required</span>
 			
 			<label for="">Country</label>
-			<select name="country" id="" ng-model="user.country" ng-options="country.name for country in countries" class="hide">
+			<select name="country" id="" ng-model="user.country" ng-options="country.name for country in countries" class="hide" required>
 				<option value="">Select your country</option>
 			</select>
 
@@ -62,14 +72,26 @@
 					<li ng-repeat="country in countries" ng-click="customSelect(country)">{{country.name}}</li>
 				</ul>
 			</div>
+			<span ng-show="!registration.country.$pristine && registration.country.$invalid" ng-class="{error: err.country}">This field is required</span>
 
 			<br>
 
 			
 
-			<label for="">Do you have passport?</label>
+			<label for="">Do you have passport?</label> <br>
 
+			<div class="field radiobtn" ng-class="{ active: user.hasPassport == 'yes' }" ng-click="user.hasPassport = 'yes'"><i></i> Yes</div> <br>
+			<div ng-if="user.hasPassport == 'yes'">
+				<label for="">Passport number</label>
+				<input type="text" name="passportNumber" ng-model="user.passportNumber">
+			</div>
 
+			<div class="field radiobtn" ng-class="{ active: user.hasPassport == 'no' }" ng-click="user.hasPassport = 'no'"><i></i> No</div> <br>
+			<div class="field radiobtn" ng-class="{ active: user.hasPassport == 'na' }" ng-click="user.hasPassport = 'na'"><i></i> I dont know</div>
+
+			<input type="hidden" name="hasPassport" ng-model="user.hasPassport">
+
+			
 			
 			<hr>
 

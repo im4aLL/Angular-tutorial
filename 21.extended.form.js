@@ -28,11 +28,25 @@ function globalCtrl($scope){
 }
 
 function formCtrl($scope, Data){
-	$scope.user = Data.user;
+	//$scope.user = Data.user;
 	$scope.countries = Data.countryList;
+	$scope.err = {};
 
 	$scope.submitFrm = function(form){
-		console.log( $scope.user );
+		
+		if( form.$valid === false ) {
+			var requiredFields = form.$error.required,
+				focused = false;
+
+			for(var i=0; i < requiredFields.length; i++){
+				requiredFields[i].$setViewValue('');
+				$scope.err[requiredFields[i].$name] = true;
+			}
+		}
+
+		console.log(form);
+		console.log($scope.user);
+
 		return false;
 	};
 
