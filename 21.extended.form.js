@@ -46,8 +46,4 @@ function formCtrl($scope, Data){
 		$event.stopPropagation();
 	};
 
-	$scope.agreeCheck = function(){
-		$scope.user.agreed = !$scope.user.agreed;
-	}
-
 }
