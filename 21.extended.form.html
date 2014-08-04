@@ -14,6 +14,7 @@
 		 .custom-select ul{ position: absolute; list-style:none; border:1px solid #ccc; width:210px; color: #0a3845; z-index: 5; width: 500px;} 
 		 .custom-select ul li{line-height:30px; border-bottom:1px solid #ccc ; padding-left:10px; background: #fff}
 		 .custom-select ul li:nth-child(even){background:#ccc}
+		 .custom-select ul li.selected { background: #777; color: #FFF }
 
 		 .custom-select span em { font-style: normal; font-size: 14px }
 
@@ -46,7 +47,7 @@
 
 		<h3>Custom select and checkbox UI validation in Angular</h3>
 
-		<form action="" name="registration" ng-submit="submitFrm(registration)" novalidate>
+		<form action="#" name="registration" ng-submit="submitFrm(registration)" novalidate>
 			
 			<label for="" ng-class="{error: err.username}">Username</label>
 			<input type="text" name="username" id="username" ng-model="user.username" ng-minlength="5" required ng-class="{error: err.username}">
@@ -69,7 +70,7 @@
 				<i>&gt;</i></span>
 				
 				<ul ng-show="toggle.state">
-					<li ng-repeat="country in countries" ng-click="customSelect(country)">{{country.name}}</li>
+					<li ng-repeat="country in countries" ng-class="{selected: country == user.country }" ng-click="customSelect(country)">{{country.name}}</li>
 				</ul>
 			</div>
 			<span ng-show="!registration.country.$pristine && registration.country.$invalid" ng-class="{error: err.country}">This field is required</span>
@@ -89,7 +90,7 @@
 			<div class="field radiobtn" ng-class="{ active: user.hasPassport == 'no' }" ng-click="user.hasPassport = 'no'"><i></i> No</div> <br>
 			<div class="field radiobtn" ng-class="{ active: user.hasPassport == 'na' }" ng-click="user.hasPassport = 'na'"><i></i> I dont know</div>
 
-			<input type="hidden" name="hasPassport" ng-model="user.hasPassport">
+			<input type="hidden" name="hasPassport" ng-model="user.hasPassport" value="{{user.hasPassport}}">
 
 			
 			
@@ -97,14 +98,14 @@
 
 			<div class="field checkbox" ng-class="{active: user.adult == true}" ng-init="user.adult = false" ng-click="user.adult = !user.adult">
 				<i></i> <span>I am 18 years old</span>
-				<input type="hidden" name="adult" ng-model="user.adult">
+				<input type="hidden" name="adult" ng-model="user.adult" value="{{user.adult}}">
 			</div>
 			
 			<br>
 
 			<div class="field checkbox" ng-class="{active: user.agreed == true}" ng-init="user.agreed = false" ng-click="user.agreed = !user.agreed">
 				<i></i> <span>I agree with the terms and condition</span>
-				<input type="hidden" name="agreed" ng-model="user.agreed">
+				<input type="hidden" name="agreed" ng-model="user.agreed" value="{{user.agreed}}">
 			</div>
 
 			<br><br>

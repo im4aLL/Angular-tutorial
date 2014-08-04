@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular directive and behaviour</title>
+	
+	<style>
+		.box { width: 200px; height: 200px; margin: 100px auto 0; background-color: #ddd; padding: 20px; font-family: Arial; font-size: 13px; line-height: 18px; }
+		.box.black { background: #000; color: #fff }
+	</style>
+
+</head>
+<body>
+	
+	<div class="box" enter leave popup>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, eos id itaque aspernatur voluptatem, minus accusantium dolorum praesentium necessitatibus at dignissimos numquam atque eum dolore iure nemo qui consequuntur eveniet.
+	</div>
+
+	<div class="box" mouse-in="black" mouse-out="red">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, dignissimos rerum numquam consequuntur error facere blanditiis a. Distinctio, consectetur voluptates vel velit! Ipsam quas, excepturi recusandae nesciunt molestias soluta quod!
+	</div>
+
+	<script src="src/angular.1.3.min.js"></script>
+	<script src="24.directive_behavior.js"></script>
+</body>
+</html>

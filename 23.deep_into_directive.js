@@ -15,3 +15,29 @@ app.directive('superman', function() {
 		}
 	};
 });
+
+app.directive('color', function(){
+	return {
+		restrict: 'A',
+		replace: true,
+		template: '<h4>Text from directive</h4>',
+		link: function($scope, iElm, iAttrs){
+			//console.log( iAttrs.color );
+			console.log( iElm );
+
+			switch( iAttrs.color ) {
+				case 'red':
+					iElm
+						.css({ 'color' : '#ff0000' })
+						.html('Im red and modified!');
+				break;
+
+				case 'green':
+					iElm.css({ 'color' : 'green' });
+				break;
+			}
+
+
+		}
+	}
+});

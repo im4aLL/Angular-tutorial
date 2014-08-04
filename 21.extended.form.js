@@ -47,7 +47,7 @@ function formCtrl($scope, Data){
 		console.log(form);
 		console.log($scope.user);
 
-		return false;
+		//return false;
 	};
 
 	$scope.customSelect = function(object){
