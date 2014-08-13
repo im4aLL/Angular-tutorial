@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS: Directive to directive</title>
+    
+    <style>
+        .btn { background: #ddd; padding: 0 15px; font-size: 14px; line-height: 35px; display: inline-block; color: #777; text-decoration: none}
+    </style>
+</head>
+<body>
+   
+    <div ng-app="myApp">
+        <superhero class="btn" speed flight strength>Superman</superhero>
+        <superhero class="btn" strength>Hulk</superhero>
+        <superhero class="btn" speed flight>Captain</superhero>
+    </div>
+    
+    <script src="src/angular.1.3.min.js"></script>
+    <script src="26.directive_2_directive.js"></script>
+</body>
+</html>
