@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Transclude</title>
+</head>
+<body>
+
+
+	<div ng-app="app">
+		<clock timezone="PST"></clock>
+		
+		<container title="Container header">
+			<clock timezone="PST"></clock>
+		</container>
+	</div>
+
+	<script src="src/angular.1.3.min.js"></script>
+	<script>
+		var app = angular.module("app", []);
+		
+		app.directive("clock", function(){
+			return {
+				restrict: "E",
+				scope: {
+					timezone: '@'	
+				},
+				template: "<p>02:00 pm {{timezone}}</p>"
+			}
+		});
+		
+		app.directive("container", function(){
+			return {
+				restrict: "E",
+				transclude: true,
+				scope: {
+					title: "@"	
+				},
+				template: '<div class="container">'+
+				'<h2>{{title}}</h2>'+
+				'<div ng-transclude></div>'+
+				'</div>'
+			}
+		});
+	</script>
+
+</body>
+</html>
