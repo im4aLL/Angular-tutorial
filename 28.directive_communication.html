@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Directive communication &raquo; Angular</title>
+</head>
+<body>
+
+
+	<div ng-app="app">
+		
+		<div ng-controller="controller">
+			
+			<country>
+				<state><city></city></state>
+			</country>
+			
+		</div>
+		
+	</div>
+
+	<script src="src/angular.1.3.min.js"></script>
+	<script>
+		var app = angular.module("app", []);
+		
+		app.controller("controller", function($scope){
+			
+			$scope.countryList = [
+				{ name: "Bangladesh", code: "BD" },
+				{ name: "United states", code: "USA" },
+				{ name: "Russia", code: "RU" }
+			];
+			
+			$scope.cityList = {
+				"BD" : ["Dhaka", "CTG", "Rajshahi"],
+				"USA" : ["NY", "PA", "CA"],
+				"RU" : ["Moscow", "RQ", "SQ"]
+			};
+			
+			$scope.state = {
+				"Dhaka" : ["Uttara", "Banani", "Mirpur"],
+				"NY" : ["NA", "NB", "NC"],
+				"Moscow" : ["MA", "MB", "MC"]
+			};
+			
+		});
+		
+		
+		app.directive("country", function(){
+			return {
+				restrict: "E",
+				controller: function(){
+					this.makeAnnouncement = function(msg){
+						alert("Country says " + msg);
+					}
+				}
+			}
+		});
+		
+		app.directive("state", function(){
+			return {
+				restrict: "E",
+				controller: function(){
+					this.makeLaw = function(msg){
+						alert("State says: "+msg);
+					}
+				},
+				require: "^country",
+				link: function($scope, element, attr, countryCtrl){
+					
+				}
+			}
+		});
+		
+		app.directive("city", function(){
+			return {
+				restrict: "E",
+				require: ['^country', '^state'],
+				link: function($scope, element, attr, ctrls){
+					ctrls[0].makeAnnouncement("City overwrites country!");
+					ctrls[1].makeLaw("City overwrites country!");
+				}
+			}
+		});
+		
+	</script>
+
+</body>
+</html>
